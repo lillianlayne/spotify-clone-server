@@ -5,8 +5,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   name: String,
   email: String,
-  password: String,
-  image: String, 
+  passwordDigest: String,
   playlists: [
     {
       type: Schema.Types.ObjectId, 
