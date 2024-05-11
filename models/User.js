@@ -32,7 +32,7 @@ const UserSchema = new Schema({
   ], 
   likedSongs: [SongsSchema], 
   likedAlbums: [AlbumsSchema], 
-  likedArtist: [ArtistSchema],
+  likedArtists: [ArtistSchema],
 }, {
   timestamps: true
 })

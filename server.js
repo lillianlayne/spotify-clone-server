@@ -21,6 +21,6 @@ app.use(morgan("dev"));
 // routers
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
-app.use("/liked", likedRouter)
+
 
 app.listen(PORT, () => console.log(`listening on PORT ${PORT}`));
