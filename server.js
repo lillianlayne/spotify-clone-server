@@ -11,6 +11,7 @@ const morgan = require("morgan");
 // require routes
 const userRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
+const likedRouter = require("./routes/liked.js")
 // middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -20,5 +21,6 @@ app.use(morgan("dev"));
 // routers
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+app.use("/liked", likedRouter)
 
 app.listen(PORT, () => console.log(`listening on PORT ${PORT}`));
