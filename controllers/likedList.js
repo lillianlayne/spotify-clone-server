@@ -52,8 +52,37 @@ const addArtist = async (req, res) => {
    }
 }
 
+const deleteSong = async (req, res) => {
+  const user = await User.findById(req.params.id)
+  const songs = user.likedSongs;
+
+  try {
+  res.json(await songs.findByIdAndDelete(req.body))
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}
+
+const deleteAlbum = async (req, res) => {
+  const user = await User.findById(req.params.id)
+  const albums = user.likedAlbums;
+  const albumToRemove = req.body.content
+
+  try {
+    const indexRemove = user.likedAlbums.findIndex((album) => album.content === albumToRemove);
+    user.likedAlbums.splice(indexRemove, 1)
+    await user.save()
+    res.json(user)
+
+  } catch (error) {
+    res.status(400).json(error)
+  }
+  
+}
+
 module.exports = {
   addSong, 
   addAlbum,
-  addArtist
+  addArtist, 
+  deleteAlbum
 }

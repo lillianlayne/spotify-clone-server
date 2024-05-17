@@ -21,6 +21,7 @@ router.put("/:id", userCtrl.update);
 router.post("/:id/songs", likedCtrl.addSong);
 router.post("/:id/albums", likedCtrl.addAlbum);
 router.post("/:id/artists", likedCtrl.addArtist);
+router.delete("/:id/albums", likedCtrl.deleteAlbum);
 
 
 module.exports = router
