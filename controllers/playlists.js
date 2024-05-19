@@ -1,26 +1,55 @@
 const {Playlist, User} = require('../models');
 
-const showPlaylists = async (req, res) => {
-  const user = await User.findById(req.params.id).populate('playlists');
+const playlist = async (req, res) => {
   
   try {
+    const {title, description} = req.body;
+    const user = await User.findById(req.params._id);
+
+    const playlist = await Playlist.create({
+      title, 
+      description, 
+      owner: [user._id]
+    });
+    
+    await playlist.save();
+    user.playlists.push(playlist);
+    await user.save()
+
+    // const newPlaylist = new Playlist({
+    //   title, 
+    //   owner: [user._id], 
+    //   description, 
+    // });
+
+    // const playlist = await newPlaylist.save();
+    // user.playlists.push(playlist);
+    // await user.save();
+
     res.json(user)
   } catch (error) {
     res.status(400).json(error)
   }
 }
 
+const createPlaylist = async (req, res) => {
+  const {userId} = req.params.id
+  const {title, description} = req.body
 
-// const createPlaylist = async (req, res) => {
-//   const user = await User.find(req.params.id);
+  try {
+    const user = await User.findById(req.params.id)
 
-//   try {
-//     user.playlists.push(req.body.playlistId)
-//   } catch (error) {
-//     res.status(400).json(error)
-//   }
-// }
+    const newPlaylist = await Playlist.create({
+      title, description, owner: user._id
+    })
+
+    user.playlists.push(newPlaylist._id)
+    res.json(user)
+  } catch (error) {
+    
+  }
+}
 
 module.exports = {
-  showPlaylists,
+  create: createPlaylist
 }
