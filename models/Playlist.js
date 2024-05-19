@@ -3,9 +3,7 @@ const Schema = mongoose.Schema;
 
 const PlaylistSchema = new Schema(
   {
-    title: {
-      tpye: String,
-    },
+    title: String,
     owner: [{
       type: Schema.Types.ObjectId,
       ref: "User",
