@@ -6,6 +6,7 @@ const playlistCtrl = require('../controllers/playlists')
 
 // route base: /user
 router.post("/:id/playlist", playlistCtrl.create)
+router.get("/playlist/:listId", playlistCtrl.show)
 
 
 

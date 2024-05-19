@@ -1,39 +1,6 @@
 const {Playlist, User} = require('../models');
 
-const playlist = async (req, res) => {
-  
-  try {
-    const {title, description} = req.body;
-    const user = await User.findById(req.params._id);
-
-    const playlist = await Playlist.create({
-      title, 
-      description, 
-      owner: [user._id]
-    });
-    
-    await playlist.save();
-    user.playlists.push(playlist);
-    await user.save()
-
-    // const newPlaylist = new Playlist({
-    //   title, 
-    //   owner: [user._id], 
-    //   description, 
-    // });
-
-    // const playlist = await newPlaylist.save();
-    // user.playlists.push(playlist);
-    // await user.save();
-
-    res.json(user)
-  } catch (error) {
-    res.status(400).json(error)
-  }
-}
-
 const createPlaylist = async (req, res) => {
-  const {userId} = req.params.id
   const {title, description} = req.body
 
   try {
@@ -43,13 +10,28 @@ const createPlaylist = async (req, res) => {
       title, description, owner: user._id
     })
 
+    await newPlaylist.save()
     user.playlists.push(newPlaylist._id)
+    await user.save()
     res.json(user)
   } catch (error) {
     
   }
 }
 
+const showPlaylist = async (req, res) => {
+  try {
+    const playlist =  await Playlist.findById(req.params.listId)
+
+
+    res.json(playlist)
+  } catch (error) {
+    
+  }
+}
+
+
 module.exports = {
-  create: createPlaylist
+  create: createPlaylist, 
+  show: showPlaylist
 }
