@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const PlaylistSongSchema = new Schema({
+  content: String
+})
+
 const PlaylistSchema = new Schema(
   {
     name: String,
@@ -12,9 +16,7 @@ const PlaylistSchema = new Schema(
       type: Schema.Types.ObjectId, 
       ref: "User"
     }],
-    songs: [{
-      type: String,
-    }],
+    songs: [PlaylistSongSchema],
     description: String,
   },
   {

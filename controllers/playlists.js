@@ -36,10 +36,11 @@ const showPlaylist = async (req, res) => {
 
 const addToPlaylist = async (req, res) => {
   try {
-    const playlist = Playlist.findById(req.params.listId);
+    const playlist = await Playlist.findById(req.params.id);
 
     playlist.songs.push(req.body);
     await playlist.save();
+    res.json(playlist)
   } catch (error) {
     res.status(400).json(error);
   }
