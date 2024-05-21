@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const PlaylistSchema = new Schema(
   {
-    title: String,
+    name: String,
     owner: [{
       type: Schema.Types.ObjectId,
       ref: "User",
