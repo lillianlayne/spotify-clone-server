@@ -1,10 +1,17 @@
-// const express = require('express');
-// const router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-// const likedCtrl = require('../controllers/likedList');
+const likedCtrl = require('../controllers/likedList');
 
-// router.post('/user/:id/songs', likedCtrl.addSong);
-// router.post('user/likedalbums/:id', likedCtrl.addAlbum);
-// router.post('user/likedartists/:id', likedCtrl.addArtist);
+// relative to: /user
 
-// module.exports = router
+// add to user liked lists
+router.post("/:id/songs", likedCtrl.addSong);
+router.post("/:id/albums", likedCtrl.addAlbum);
+router.post("/:id/artists", likedCtrl.addArtist);
+router.delete("/:id/albums", likedCtrl.deleteAlbum);
+router.delete("/:id/songs", likedCtrl.deleteSong);
+router.delete("/:id/artists", likedCtrl.deleteArtist);
+
+
+module.exports = router

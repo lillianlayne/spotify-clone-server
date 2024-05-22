@@ -39,9 +39,3 @@ const UserSchema = new Schema({
 
 module.exports = mongoose.model('User', UserSchema);
 
-// for postman checks
-// {
-//   "name": "Lillian Layne", 
-//   "email": "lillian@layne.com", 
-//   "password": "1234"
-// }

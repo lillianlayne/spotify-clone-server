@@ -1,7 +1,6 @@
 const { Playlist, User } = require("../models");
 
 const createPlaylist = async (req, res) => {
-  
   const { name, description } = req.body;
   console.log(name, description);
 
@@ -40,7 +39,7 @@ const addToPlaylist = async (req, res) => {
 
     playlist.songs.push(req.body);
     await playlist.save();
-    res.json(playlist)
+    res.json(playlist);
   } catch (error) {
     res.status(400).json(error);
   }
@@ -48,20 +47,20 @@ const addToPlaylist = async (req, res) => {
 
 const deletePlaylist = async (req, res) => {
   const user = await User.findById(req.params.id);
-  const itemToRemove = req.body.id
-  
+  const itemToRemove = req.body.id;
+
   try {
-    const playlist = await Playlist.findByIdAndDelete(itemToRemove)
-  
-    await user.save()
-    res.json(user)
+    const playlist = await Playlist.findByIdAndDelete(itemToRemove);
+
+    await user.save();
+    res.json(user);
   } catch (error) {
-    res.status(400).json(error)
+    res.status(400).json(error);
   }
-}
+};
 module.exports = {
   create: createPlaylist,
   show: showPlaylist,
   add: addToPlaylist,
-  delete: deletePlaylist
+  delete: deletePlaylist,
 };

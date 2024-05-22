@@ -100,13 +100,11 @@ const deleteArtist = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
   addSong,
   addAlbum,
   addArtist,
   deleteAlbum,
-  deleteArtist, 
-  deleteSong
+  deleteArtist,
+  deleteSong,
 };
